@@ -202,7 +202,7 @@ function Microform() {
         maxWidth: 400,
         mx: "auto",
         p: 0,
-        minHeight: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -212,13 +212,13 @@ function Microform() {
         <Box
           sx={{
             position: "relative",
-            height: 120,
+            height: 150,
             background: "#212121",
             color: "white",
             borderRadius: 2,
             px: 3,
             py: 2,
-            mb: 4,
+            mb: 2,
             mt: 4,
             display: "flex",
             flexDirection: "column",
@@ -304,13 +304,17 @@ function Microform() {
           </Box>
         </Box>
 
-        {error && <Alert severity="error">{error}</Alert>}
+        {error && (
+          <Alert sx={{ mb: 2 }} severity="error">
+            {error}
+          </Alert>
+        )}
 
         {/* Campo número de tarjeta (siempre en el DOM, visible solo en step 0) */}
         <Box sx={{ position: "relative", height: 100, mb: 2 }}>
           {/* Paso 0: PAN */}
 
-          <Box sx={{ position: "relative", mb: 2 }}>
+          <Box sx={{ position: "relative" }}>
             <Box
               sx={{
                 position: "relative",
@@ -419,7 +423,7 @@ function Microform() {
                   color: isExpFocused ? "#1976d2" : "#212121", // 👈 aquí está el cambio importante
                   "&::placeholder": {
                     color: "#888",
-                    fontSize: "0.8rem",
+                    fontSize: "0.65rem",
                   },
                 },
 
@@ -554,53 +558,66 @@ function Microform() {
       </Box>
 
       <Box
-        sx={{ display: "flex", justifyContent: "space-between", gap: 2, mb: 2 }}
+        sx={{
+          position: "sticky", // se mantiene visible cuando hay scroll
+          bottom: 0,
+          zIndex: 10,
+          backgroundColor: "#fff", // fondo blanco para que no se mezcle con el contenido
+          pt: 2,
+          px: 2,
+          pb: {
+            xs: "calc(env(safe-area-inset-bottom) + 8px)",
+            sm: 2,
+          },
+        }}
       >
-        {activeStep > 0 && (
+        <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
+          {activeStep > 0 && (
+            <Button
+              variant="outlined"
+              fullWidth
+              sx={{
+                height: 46,
+                borderColor: "#ccc",
+                color: "#212121",
+                textTransform: "none",
+                "&:hover": {
+                  borderColor: "#999",
+                },
+              }}
+              onClick={handleBack}
+              disabled={loading}
+            >
+              Volver
+            </Button>
+          )}
+
           <Button
-            variant="outlined"
+            variant="contained"
             fullWidth
             sx={{
+              color: "black",
               height: 46,
-              borderColor: "#ccc", // 👈 borde gris claro
-              color: "#212121", // color de texto si querés mantenerlo oscuro
-              textTransform: "none", // opcional: mantener el texto como lo escribís
+              backgroundColor: "#FFBC0D",
+              textTransform: "none",
+              boxShadow: "none",
               "&:hover": {
-                borderColor: "#999", // opcional: un poco más oscuro en hover
+                backgroundColor: "#e0a800",
+                boxShadow: "none",
               },
             }}
-            onClick={handleBack}
+            onClick={handleNext}
             disabled={loading}
           >
-            Volver
+            {activeStep < steps.length - 1 ? (
+              "Siguiente"
+            ) : loading ? (
+              <CircularProgress size={24} />
+            ) : (
+              "Guardar tarjeta"
+            )}
           </Button>
-        )}
-
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            color: "black",
-            height: 46,
-            backgroundColor: "#FFBC0D",
-            textTransform: "none",
-            boxShadow: "none", // 👈 quita la sombra
-            "&:hover": {
-              backgroundColor: "#e0a800", // opcional: color hover sin sombra
-              boxShadow: "none", // 👈 quita la sombra también en hover
-            },
-          }}
-          onClick={handleNext}
-          disabled={loading}
-        >
-          {activeStep < steps.length - 1 ? (
-            "Siguiente"
-          ) : loading ? (
-            <CircularProgress size={24} />
-          ) : (
-            "Guardar tarjeta"
-          )}
-        </Button>
+        </Box>
       </Box>
     </Box>
   );
