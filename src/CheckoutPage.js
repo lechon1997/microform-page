@@ -44,6 +44,7 @@ function Microform() {
   const [cvvIsValid, setCvvIsValid] = useState(false);
   const [nameError, setNameError] = useState(null);
   const [expError, setExpError] = useState(null);
+  const [activeCardType, setActiveCardType] = useState("");
 
   const myStyles = {
     input: {
@@ -135,12 +136,12 @@ function Microform() {
           if (event.card?.length === 1) {
             const cardType = event.card[0].name;
             if (cardImages[cardType]) {
-              setCardLogoSrc(cardImages[cardType]);
+              setActiveCardType(cardType);
             } else {
-              setCardLogoSrc("");
+              setActiveCardType("");
             }
           } else {
-            setCardLogoSrc("");
+            setActiveCardType("");
           }
         });
 
@@ -322,20 +323,37 @@ function Microform() {
           }}
         >
           <Box
-            component="img"
-            className="cardDisplay"
-            src={cardLogoSrc}
-            alt="card logo"
             sx={{
-              visibility: cardLogoSrc ? "visible" : "hidden",
               position: "absolute",
               top: 16,
               left: 22,
               width: 40,
               height: 24,
-              objectFit: "contain",
+              zIndex: 2,
             }}
-          />
+          >
+            {Object.entries(cardImages).map(([type, src]) => (
+              <Box
+                key={type}
+                component="img"
+                src={src}
+                alt={`${type} logo`}
+                sx={{
+                  width: 40,
+                  height: 24,
+                  objectFit: "contain",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  opacity: activeCardType === type ? 1 : 0,
+                  transition: "opacity 0.2s",
+                  pointerEvents: "none", // Evita que se cliqueen las invisibles
+                  visibility: activeCardType === type ? "visible" : "hidden",
+                }}
+              />
+            ))}
+          </Box>
+
           <img
             src="/chip2.svg"
             alt="chip dorado"
