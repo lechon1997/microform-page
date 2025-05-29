@@ -331,8 +331,8 @@ function Microform() {
             sx={{
               visibility: "hidden",
               position: "absolute",
-              top: 8,
-              right: 16,
+              top: 16,
+              left: 22,
               width: 40,
               height: 24,
               objectFit: "contain",
@@ -356,7 +356,7 @@ function Microform() {
           {/* Línea central con los asteriscos */}
           <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
             <Typography
-              sx={{ letterSpacing: 2, fontSize: 18, fontWeight: 500, mt: 2 }}
+              sx={{ letterSpacing: 2, fontSize: 18, fontWeight: 500, mt: 3 }}
             >
               **** **** **** ****
             </Typography>
