@@ -38,6 +38,8 @@ function Microform() {
   const [panError, setPanError] = useState(null);
   const [cardIsValid, setCardIsValid] = useState(false);
 
+  const [cardLogoSrc, setCardLogoSrc] = useState("");
+
   const [cvvError, setCvvError] = useState(null);
   const [cvvIsValid, setCvvIsValid] = useState(false);
   const [nameError, setNameError] = useState(null);
@@ -58,6 +60,16 @@ function Microform() {
     invalid: {
       color: "#d32f2f",
     },
+  };
+
+  const cardImages = {
+    visa: "./visa.png",
+    mastercard: "./mastercard.png",
+    amex: "./amex.png",
+    maestro: "./maestro.png",
+    discover: "./discover.png",
+    dinersclub: "./dinersclub.png",
+    jcb: "./jcb.png",
   };
 
   const handleExpDateChange = (e) => {
@@ -116,33 +128,19 @@ function Microform() {
         panField.on("focus", () => setIsNumberFocused(true));
         panField.on("blur", () => setIsNumberFocused(false));
         panField.on("change", (event) => {
-          console.log("PAN event", event);
           setPanError(null);
           setPanIsEmpty(event.empty);
-          setPanIsEmpty(event.empty);
           setCardIsValid(event.valid);
-
-          const cardImage = document.querySelector("img.cardDisplay");
-          const cardImages = {
-            visa: "./visa.png",
-            mastercard: "./mastercard.png",
-            amex: "./amex.png",
-            maestro: "./maestro.png",
-            discover: "./discover.png",
-            dinersclub: "./dinersclub.png",
-            jcb: "./jcb.png",
-          };
 
           if (event.card?.length === 1) {
             const cardType = event.card[0].name;
             if (cardImages[cardType]) {
-              cardImage.src = cardImages[cardType];
-              cardImage.style.visibility = "visible";
+              setCardLogoSrc(cardImages[cardType]);
             } else {
-              cardImage.style.visibility = "hidden";
+              setCardLogoSrc("");
             }
           } else {
-            cardImage.style.visibility = "hidden";
+            setCardLogoSrc("");
           }
         });
 
@@ -326,10 +324,10 @@ function Microform() {
           <Box
             component="img"
             className="cardDisplay"
-            src=""
+            src={cardLogoSrc}
             alt="card logo"
             sx={{
-              visibility: "hidden",
+              visibility: cardLogoSrc ? "visible" : "hidden",
               position: "absolute",
               top: 16,
               left: 22,
