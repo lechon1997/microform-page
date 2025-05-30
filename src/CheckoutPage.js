@@ -447,44 +447,21 @@ function Microform() {
                 display: activeStep === 0 ? "block" : "none", // 👈 oculta todo visualmente pero lo mantiene en el DOM
               }}
             >
-              <TextField
-                label="Número de tarjeta"
-                fullWidth
-                error={!!panError}
-                InputProps={{
-                  readOnly: false,
-                  sx: {
-                    height: 50,
-                    paddingY: 0,
-                  },
-                }}
-                InputLabelProps={{
-                  shrink: isNumberFocused || !panIsEmpty,
-                }}
+              {/* Campo funcional real de CyberSource */}
+              <Box
+                id="number-container"
                 sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "10px",
-                  },
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: isNumberFocused ? "#000" : "#ccc",
-                    borderWidth: isNumberFocused ? 2 : 1,
-                  },
-                  "& label": {
-                    fontSize: "0.8rem",
-                    color: isNumberFocused ? "#000" : "#888",
-                  },
-                  "& .MuiInputLabel-shrink": {
-                    fontSize: "0.75rem",
-                    transform: "translate(16px, -6px) scale(0.75)",
-                  },
-                  "& .MuiOutlinedInput-notchedOutline > legend": {
-                    maxWidth:
-                      isNumberFocused || !panIsEmpty ? "90px" : "0.01px",
-                  },
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  px: 2,
+                  display: "flex", // 👈 esto lo oculta fuera del paso 0
+                  alignItems: "center",
+                  pointerEvents: "auto",
                 }}
               />
-
-              {/* Campo funcional real de CyberSource */}
             </Box>
             {panError && (
               <Typography
@@ -515,20 +492,7 @@ function Microform() {
             }}
           >
             {/* Fecha de expiración */}
-            <Box
-              id="number-container"
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                px: 2,
-                display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
-                alignItems: "center",
-                pointerEvents: "auto",
-              }}
-            />
+
             <Box sx={{ width: "50%", position: "relative" }}>
               <TextField
                 label="Fecha de expiración"
