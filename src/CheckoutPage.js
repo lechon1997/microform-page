@@ -133,16 +133,8 @@ function Microform() {
           setPanIsEmpty(event.empty);
           setCardIsValid(event.valid);
 
-          if (event.card?.length === 1) {
-            const cardType = event.card[0].name;
-            if (cardImages[cardType]) {
-              setActiveCardType(cardType);
-            } else {
-              setActiveCardType("");
-            }
-          } else {
-            setActiveCardType("");
-          }
+          const detectedType = event.card?.[0]?.name;
+          setActiveCardType(cardImages[detectedType] ? detectedType : "");
         });
 
         // Campo CVV
@@ -346,10 +338,10 @@ function Microform() {
                   position: "absolute",
                   top: 0,
                   left: 0,
-                  opacity: activeCardType === type ? 1 : 0,
+                  opacity: 0,
                   transition: "opacity 0.2s",
                   pointerEvents: "none", // Evita que se cliqueen las invisibles
-                  visibility: activeCardType === type ? "visible" : "hidden",
+                  visibility: "hidden",
                 }}
               />
             ))}
