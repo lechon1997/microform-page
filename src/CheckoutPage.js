@@ -126,8 +126,8 @@ function Microform() {
         // Campo PAN
         const panField = microform.createField("number", {});
         panField.load("#number-container");
-        panField.on("focus", () => setIsNumberFocused(true));
-        panField.on("blur", () => setIsNumberFocused(false));
+        //panField.on("focus", () => setIsNumberFocused(true));
+        //panField.on("blur", () => setIsNumberFocused(false));
         panField.on("change", (event) => {
           /*setPanError(null);
           setPanIsEmpty(event.empty);
