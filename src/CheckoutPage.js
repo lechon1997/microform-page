@@ -126,15 +126,15 @@ function Microform() {
         // Campo PAN
         const panField = microform.createField("number", {});
         panField.load("#number-container");
-        //panField.on("focus", () => setIsNumberFocused(true));
-        //panField.on("blur", () => setIsNumberFocused(false));
+        panField.on("focus", () => setIsNumberFocused(true));
+        panField.on("blur", () => setIsNumberFocused(false));
         panField.on("change", (event) => {
-          /*setPanError(null);
+          setPanError(null);
           setPanIsEmpty(event.empty);
           setCardIsValid(event.valid);
 
           const detectedType = event.card?.[0]?.name;
-          setActiveCardType(cardImages[detectedType] ? detectedType : "");*/
+          setActiveCardType(cardImages[detectedType] ? detectedType : "");
         });
 
         // Campo CVV
@@ -291,8 +291,7 @@ function Microform() {
         maxWidth: 400,
         mx: "auto",
         p: 0,
-        mt: 8,
-        minHeight: "100dvh",
+        pt: 4,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -309,7 +308,6 @@ function Microform() {
             px: 3,
             py: 2,
             mb: 2,
-            mt: 4,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -338,10 +336,10 @@ function Microform() {
                   position: "absolute",
                   top: 0,
                   left: 0,
-                  opacity: 0,
+                  opacity: activeCardType === type ? 1 : 0,
                   transition: "opacity 0.2s",
                   pointerEvents: "none", // Evita que se cliqueen las invisibles
-                  visibility: "hidden",
+                  visibility: activeCardType === type ? "visible" : "hidden",
                 }}
               />
             ))}
