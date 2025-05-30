@@ -129,12 +129,12 @@ function Microform() {
         panField.on("focus", () => setIsNumberFocused(true));
         panField.on("blur", () => setIsNumberFocused(false));
         panField.on("change", (event) => {
-          setPanError(null);
+          /*setPanError(null);
           setPanIsEmpty(event.empty);
           setCardIsValid(event.valid);
 
           const detectedType = event.card?.[0]?.name;
-          setActiveCardType(cardImages[detectedType] ? detectedType : "");
+          setActiveCardType(cardImages[detectedType] ? detectedType : "");*/
         });
 
         // Campo CVV
