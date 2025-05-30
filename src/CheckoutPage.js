@@ -291,7 +291,8 @@ function Microform() {
         maxWidth: 400,
         mx: "auto",
         p: 0,
-        pt: 4,
+        mt: 8,
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -308,6 +309,7 @@ function Microform() {
             px: 3,
             py: 2,
             mb: 2,
+            mt: 4,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -440,29 +442,21 @@ function Microform() {
           {/* Paso 0: PAN */}
 
           <Box sx={{ position: "relative" }}>
+            {/* Campo funcional real de CyberSource */}
             <Box
+              id="number-container"
               sx={{
-                position: "relative",
-                mb: 2,
-                display: activeStep === 0 ? "block" : "none", // 👈 oculta todo visualmente pero lo mantiene en el DOM
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                px: 2,
+                display: "flex", // 👈 esto lo oculta fuera del paso 0
+                alignItems: "center",
+                pointerEvents: "auto",
               }}
-            >
-              {/* Campo funcional real de CyberSource */}
-              <Box
-                id="number-container"
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  px: 2,
-                  display: "flex", // 👈 esto lo oculta fuera del paso 0
-                  alignItems: "center",
-                  pointerEvents: "auto",
-                }}
-              />
-            </Box>
+            />
             {panError && (
               <Typography
                 sx={{
