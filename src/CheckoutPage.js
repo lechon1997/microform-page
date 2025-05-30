@@ -124,7 +124,7 @@ function Microform() {
         const microform = flex.microform({ styles: myStyles });
 
         // Campo PAN
-        const panField = microform.createField("number", {});
+        const panField = microform.createField("number", { styles: myStyles });
         panField.load("#number-container");
         panField.on("focus", () => setIsNumberFocused(true));
         panField.on("blur", () => setIsNumberFocused(false));
@@ -138,7 +138,9 @@ function Microform() {
         });
 
         // Campo CVV
-        const cvvField = microform.createField("securityCode", {});
+        const cvvField = microform.createField("securityCode", {
+          styles: myStyles,
+        });
         cvvField.load("#securityCode-container");
         cvvField.on("focus", () => setIsCvvFocused(true));
         cvvField.on("blur", () => setIsCvvFocused(false));
@@ -294,24 +296,39 @@ function Microform() {
         mt: 8,
         minHeight: "100dvh",
         display: "flex",
-        flexDirection: "column",
+        //flexDirection: "column",
         justifyContent: "space-between",
       }}
     >
       <Box
         id="number-container"
         sx={{
-          position: "absolute",
+          //position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           px: 2,
-          display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
+          //display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
           alignItems: "center",
           pointerEvents: "auto",
         }}
       />
+      <Box
+        id="securityCode-container"
+        sx={{
+          //position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          px: 2,
+          //display: "flex",
+          alignItems: "center",
+          pointerEvents: "auto",
+        }}
+      />
+      {/*  
       <Box>
         <Box
           sx={{
@@ -376,7 +393,6 @@ function Microform() {
             }}
           />
 
-          {/* Línea central con los asteriscos */}
           <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
             <Typography
               sx={{ letterSpacing: 2, fontSize: 18, fontWeight: 500, mt: 3 }}
@@ -385,7 +401,6 @@ function Microform() {
             </Typography>
           </Box>
 
-          {/* Línea inferior con nombre y fecha */}
           <Box
             sx={{
               display: "flex",
@@ -451,9 +466,8 @@ function Microform() {
           </Alert>
         )}
 
-        {/* Campo número de tarjeta (siempre en el DOM, visible solo en step 0) */}
         <Box sx={{ position: "relative", height: 100, mb: 2 }}>
-          {/* Paso 0: PAN */}
+      
 
           <Box sx={{ position: "relative" }}>
             <Box
@@ -503,7 +517,20 @@ function Microform() {
                 }}
               />
 
-              {/* Campo funcional real de CyberSource */}
+              <Box
+                id="number-container"
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  px: 2,
+                  display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
+                  alignItems: "center",
+                  pointerEvents: "auto",
+                }}
+              />
             </Box>
             {panError && (
               <Typography
@@ -522,7 +549,6 @@ function Microform() {
               </Typography>
             )}
           </Box>
-          {/* Paso 2: Expiración + CVV */}
           <Box
             sx={{
               position: "absolute",
@@ -533,7 +559,6 @@ function Microform() {
               gap: 2,
             }}
           >
-            {/* Fecha de expiración */}
 
             <Box sx={{ width: "50%", position: "relative" }}>
               <TextField
@@ -611,8 +636,6 @@ function Microform() {
                 </Typography>
               )}
             </Box>
-
-            {/* CVV visual */}
             <Box sx={{ width: "50%", position: "relative" }}>
               <TextField
                 label="Código de seguridad"
@@ -689,7 +712,6 @@ function Microform() {
             </Box>
           </Box>
 
-          {/* Paso 3: Nombre */}
           <Box
             sx={{
               position: "absolute",
@@ -842,16 +864,11 @@ function Microform() {
           </Button>
         </Box>
       </Box>
+    */}
     </Box>
   );
 }
 
 export default function CheckoutPage() {
-  return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ px: 2 }}>
-        <Microform />
-      </Box>
-    </ThemeProvider>
-  );
+  return <Microform />;
 }

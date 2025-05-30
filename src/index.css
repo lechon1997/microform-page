@@ -12,3 +12,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.flex-microform {
+  height: 20px;
+  background: red;
+}
+/* different styling for a specific container */
+#securityCode-container.flex-microform {
+  background: purple;
+}
+.flex-microform-focused {
+  background: lightyellow;
+}
+.flex-microform-valid {
+  background: green;
+}
+.flex-microform-valid.flex-microform-focused {
+  background: lightgreen;
+}
+.flex-microform-autocomplete {
+  background: #faffbd;
+}
