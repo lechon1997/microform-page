@@ -462,9 +462,6 @@ function Microform() {
                   shrink: isNumberFocused || !panIsEmpty,
                 }}
                 sx={{
-                  "& .MuiInputBase-root": {
-                    pointerEvents: "none",
-                  },
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "10px",
                   },
