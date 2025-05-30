@@ -298,6 +298,20 @@ function Microform() {
         justifyContent: "space-between",
       }}
     >
+      <Box
+        id="number-container"
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          px: 2,
+          display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
+          alignItems: "center",
+          pointerEvents: "auto",
+        }}
+      />
       <Box>
         <Box
           sx={{
@@ -441,19 +455,73 @@ function Microform() {
         <Box sx={{ position: "relative", height: 100, mb: 2 }}>
           {/* Paso 0: PAN */}
 
-          <Box
-            id="number-container"
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              px: 2,
-              alignItems: "center",
-              pointerEvents: "auto",
-            }}
-          />
+          <Box sx={{ position: "relative" }}>
+            <Box
+              sx={{
+                position: "relative",
+                mb: 2,
+                display: activeStep === 0 ? "block" : "none", // 👈 oculta todo visualmente pero lo mantiene en el DOM
+              }}
+            >
+              <TextField
+                label="Número de tarjeta"
+                fullWidth
+                error={!!panError}
+                InputProps={{
+                  readOnly: true,
+                  sx: {
+                    height: 50,
+                    paddingY: 0,
+                  },
+                }}
+                InputLabelProps={{
+                  shrink: isNumberFocused || !panIsEmpty,
+                }}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    pointerEvents: "none",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "10px",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: isNumberFocused ? "#000" : "#ccc",
+                    borderWidth: isNumberFocused ? 2 : 1,
+                  },
+                  "& label": {
+                    fontSize: "0.8rem",
+                    color: isNumberFocused ? "#000" : "#888",
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    fontSize: "0.75rem",
+                    transform: "translate(16px, -6px) scale(0.75)",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline > legend": {
+                    maxWidth:
+                      isNumberFocused || !panIsEmpty ? "90px" : "0.01px",
+                  },
+                }}
+              />
+
+              {/* Campo funcional real de CyberSource */}
+            </Box>
+            {panError && (
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: 8, // alineado al label/input
+                  top: "100%", // justo debajo del campo
+                  color: "#d32f2f",
+                  fontSize: "0.7rem",
+                  pointerEvents: "none", // no bloquea el mouse
+                  zIndex: 2,
+                  mt: "2px", // separación visual mínima
+                }}
+              >
+                {panError}
+              </Typography>
+            )}
+          </Box>
           {/* Paso 2: Expiración + CVV */}
           <Box
             sx={{
