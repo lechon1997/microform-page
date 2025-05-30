@@ -441,39 +441,19 @@ function Microform() {
         <Box sx={{ position: "relative", height: 100, mb: 2 }}>
           {/* Paso 0: PAN */}
 
-          <Box sx={{ position: "relative" }}>
-            {/* Campo funcional real de CyberSource */}
-            <Box
-              id="number-container"
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                px: 2,
-                display: "flex", // 👈 esto lo oculta fuera del paso 0
-                alignItems: "center",
-                pointerEvents: "auto",
-              }}
-            />
-            {panError && (
-              <Typography
-                sx={{
-                  position: "absolute",
-                  left: 8, // alineado al label/input
-                  top: "100%", // justo debajo del campo
-                  color: "#d32f2f",
-                  fontSize: "0.7rem",
-                  pointerEvents: "none", // no bloquea el mouse
-                  zIndex: 2,
-                  mt: "2px", // separación visual mínima
-                }}
-              >
-                {panError}
-              </Typography>
-            )}
-          </Box>
+          <Box
+            id="number-container"
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              px: 2,
+              alignItems: "center",
+              pointerEvents: "auto",
+            }}
+          />
           {/* Paso 2: Expiración + CVV */}
           <Box
             sx={{
