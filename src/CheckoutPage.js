@@ -452,7 +452,7 @@ function Microform() {
                 fullWidth
                 error={!!panError}
                 InputProps={{
-                  readOnly: true,
+                  readOnly: false,
                   sx: {
                     height: 50,
                     paddingY: 0,
@@ -488,20 +488,6 @@ function Microform() {
               />
 
               {/* Campo funcional real de CyberSource */}
-              <Box
-                id="number-container"
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  px: 2,
-                  display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
-                  alignItems: "center",
-                  pointerEvents: "auto",
-                }}
-              />
             </Box>
             {panError && (
               <Typography
@@ -532,7 +518,20 @@ function Microform() {
             }}
           >
             {/* Fecha de expiración */}
-
+            <Box
+              id="number-container"
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                px: 2,
+                display: activeStep === 0 ? "flex" : "none", // 👈 esto lo oculta fuera del paso 0
+                alignItems: "center",
+                pointerEvents: "auto",
+              }}
+            />
             <Box sx={{ width: "50%", position: "relative" }}>
               <TextField
                 label="Fecha de expiración"
