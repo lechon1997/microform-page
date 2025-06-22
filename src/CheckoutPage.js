@@ -63,31 +63,6 @@ function Microform() {
     },
   };
 
-  const customStyles = {
-    input: {
-      "font-size": "16px",
-      color: "#3A3A3A",
-    },
-    "::placeholder": {
-      color: "blue",
-    },
-    ":focus": {
-      color: "blue",
-    },
-    ":hover": {
-      "font-style": "italic",
-    },
-    ":disabled": {
-      cursor: "not-allowed",
-    },
-    valid: {
-      color: "green",
-    },
-    invalid: {
-      color: "red",
-    },
-  };
-
   const cardImages = {
     visa: "./visa.png",
     mastercard: "./mastercard.png",
@@ -147,11 +122,11 @@ function Microform() {
     script.onload = () => {
       try {
         const flex = new window.Flex(token);
-        const microform = flex.microform({ styles: customStyles });
+        const microform = flex.microform({ styles: myStyles });
 
         // Campo PAN
         const panField = microform.createField("number", {
-          styles: { input: { color: "#d22e2e" } },
+          
         });
 
         panField.load("#number-container");
@@ -520,7 +495,7 @@ function Microform() {
               />
 
               {/* Campo funcional real de CyberSource */}
-              <div
+              <Box
                 id="number-container"
                 className="form-control"
                 sx={{

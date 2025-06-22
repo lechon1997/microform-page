@@ -14,25 +14,6 @@ code {
 }
 
 .flex-microform {
-  height: 20px;
-  background: yellow; /* O el color que prefieras */
-  -webkit-transition: background 200ms;
-  transition: background 200ms;
+  height: 50px;
 }
 
-/* different styling for a specific container */
-#securityCode-container.flex-microform {
-  background: purple;
-}
-.flex-microform-focused {
-  background: red;
-}
-.flex-microform-valid {
-  background: green;
-}
-.flex-microform-valid.flex-microform-focused {
-  background: purple;
-}
-.flex-microform-autocomplete {
-  background: red;
-}
