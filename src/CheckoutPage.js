@@ -296,7 +296,6 @@ function Microform() {
         maxWidth: 400,
         mx: "auto",
         p: 0,
-        mt: 8,
         minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
