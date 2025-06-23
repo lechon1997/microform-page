@@ -17,3 +17,12 @@ code {
   height: 50px;
 }
 
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
