@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { jwtDecode } from "jwt-decode";
+import { validateToken } from "../../api/paymentApi";
 
 export function useMicroform(steps, myStyles, cardImages) {
   const microformRef = useRef(null);
@@ -36,26 +37,38 @@ export function useMicroform(steps, myStyles, cardImages) {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const t = params.get("cc");
-    if (!t) {
-      setError("Falta el parámetro ?cc");
-      return;
-    }
-    let decoded;
-    try {
-      decoded = jwtDecode(t);
-    } catch {
-      setError("El capture-context no es válido.");
-      return;
-    }
-    if (decoded.exp && decoded.exp < Date.now() / 1000) {
-      setError("El capture-context ha expirado. Recarga la página.");
-      return;
-    }
-    setToken(t);
-    setDecodedToken(decoded);
-  }, []);
+  const params = new URLSearchParams(window.location.search);
+  const t = params.get("cc");
+
+  if (!t) {
+    setError("Falta el parámetro ?cc");
+    return;
+  }
+
+  let decoded;
+  try {
+    decoded = jwtDecode(t);
+  } catch {
+    setError("El capture-context no es válido.");
+    return;
+  }
+
+  if (decoded.exp && decoded.exp < Date.now() / 1000) {
+    setError("El capture-context ha expirado. Recarga la página.");
+    return;
+  }
+
+  setToken(t);
+  setDecodedToken(decoded);
+
+  validateToken({ token: t })
+    .then(() => {})
+    .catch((err) => {
+      console.error(err);
+      setError("Ocurrió un error al validar el token.");
+    });
+}, []);
+
 
   useEffect(() => {
     if (!token || !decodedToken || microformInitialized) return;
