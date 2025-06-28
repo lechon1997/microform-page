@@ -65,6 +65,7 @@ export function useMicroform(steps, myStyles, cardImages) {
     .then(() => {})
     .catch((err) => {
       console.error(err);
+      alert(`Error: ${err.message}`);
       setError("Ocurrió un error al validar el token.");
     });
 }, []);
